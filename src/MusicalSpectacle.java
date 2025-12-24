@@ -1,11 +1,10 @@
-public class MusicalSpectacle extends Spectacle {
-    private String musicAuthor;
-    private String librettoText;
-
+public class MusicalSpectacle extends Show {
+    protected String librettoText;
+// Я бы добавил MusicAuthor сюда так как не каждый человек Композитор
     public MusicalSpectacle(String title, int duration, Director director,
                             String musicAuthor, String librettoText) {
         super(title, duration, director);
-        this.musicAuthor = musicAuthor;
+        getDirector().setMusicAuthor(musicAuthor);
         this.librettoText = librettoText;
     }
 
@@ -14,6 +13,11 @@ public class MusicalSpectacle extends Spectacle {
         System.out.println(librettoText);
     }
 
-    public String getMusicAuthor() { return musicAuthor; }
-    public String getLibrettoText() { return librettoText; }
+    public String getMusicAuthor() {
+        return getDirector().getMusicAuthor();
+    }
+
+    public String getLibrettoText() {
+        return librettoText;
+    }
 }

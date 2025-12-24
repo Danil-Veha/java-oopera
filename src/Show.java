@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-public class Spectacle {
+public class Show {
     private String title;
     private int duration;
     private Director director;
     private ArrayList<Actor> actors;
 
-    public Spectacle(String title, int duration, Director director) {
+    public Show(String title, int duration, Director director) {
         this.title = title;
         this.duration = duration;
         this.director = director;
@@ -32,14 +32,14 @@ public class Spectacle {
         }
 
         for (Actor actor : actors) {
-            if (actor.getName().equals(newActor.getName()) &&
-                    actor.getSurname().equals(newActor.getSurname()) &&
-                    actor.getHeight() == newActor.getHeight()) {
-                System.out.println("Актёр " + newActor.getName() + " " +
-                        newActor.getSurname() + " уже существует в спектакле!");
+            if (actors.contains(newActor)) {
+                System.out.println("Актёр уже существует!");
                 return false;
             }
+            actors.add(newActor);
+            return true;
         }
+
         actors.add(newActor);
         System.out.println("Актёр " + newActor.getName() + " " +
                 newActor.getSurname() + " успешно добавлен!");
@@ -66,8 +66,16 @@ public class Spectacle {
         return false;
     }
 
-    public String getTitle() { return title; }
-    public int getDuration() { return duration; }
-    public Director getDirector() { return director; }
-    public ArrayList<Actor> getActors() { return actors; }
+    public String getTitle() {
+        return title;
+    }
+    public int getDuration() {
+        return duration;
+    }
+    public Director getDirector() {
+        return director;
+    }
+    public ArrayList<Actor> getActors() {
+        return actors;
+    }
 }

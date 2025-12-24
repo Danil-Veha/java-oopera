@@ -10,7 +10,7 @@ public class Theatre {
         Director director2 = new Director("Ольга", "Постановщикова", Gender.FEMALE, 8);
 
         //  Создаём спектакли
-        Spectacle regularShow = new Spectacle("Горе от ума", 120, director1);
+        Show regularShow = new Show("Горе от ума", 120, director1);
         Opera opera = new Opera("Травиата", 150, director2, "Джузеппе Верди",
                 "История о любви и жертве...", 30);
         Ballet ballet = new Ballet("Лебединое озеро", 135, director1, "Пётр Чайковский",
