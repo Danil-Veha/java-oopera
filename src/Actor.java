@@ -14,14 +14,26 @@ public class Actor extends Person {
         if (o == null || getClass() != o.getClass()) return false;
         Actor actor = (Actor) o;
         return Double.compare(actor.height, height) == 0 &&
-                getName().equals(actor.getName()) &&
-                getSurname().equals(actor.getSurname());
+                Objects.equals(name, actor.name) &&
+                Objects.equals(surname, actor.surname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getSurname(), height);
+        return Objects.hash(name, surname, height);
     }
 
-    public double getHeight() { return height; }
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    @Override
+    public String toString() {
+        String result = super.toString() + " (рост: " + height + " см)";
+        return result;
+    }
 }

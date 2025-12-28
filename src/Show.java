@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
 public class Show {
-    private String title;
-    private int duration;
-    private Director director;
-    private ArrayList<Actor> actors;
+    protected String title;
+    protected int duration;
+    protected Person director;
+    protected ArrayList<Actor> actors;
 
-    public Show(String title, int duration, Director director) {
+    public Show(String title, int duration, Person director) {
         this.title = title;
         this.duration = duration;
         this.director = director;
@@ -14,14 +14,17 @@ public class Show {
     }
 
     public void printDirectorInfo() {
-        System.out.println("Режиссёр: " + director.getName() + " " + director.getSurname());
+        System.out.println("Режиссёр спектакля '" + title + "': " + director);
     }
 
     public void printActorsList() {
         System.out.println("Актёры спектакля '" + title + "':");
-        for (Actor actor : actors) {
-            System.out.println("- " + actor.getName() + " " + actor.getSurname() +
-                    " (рост: " + actor.getHeight() + " см)");
+        if (actors.isEmpty()) {
+            System.out.println("  (актёров нет)");
+        } else {
+            for (Actor actor : actors) {
+                System.out.println("  - " + actor);
+            }
         }
     }
 
@@ -31,23 +34,18 @@ public class Show {
             return false;
         }
 
-        for (Actor actor : actors) {
-            if (actors.contains(newActor)) {
-                System.out.println("Актёр уже существует!");
-                return false;
-            }
-            actors.add(newActor);
-            return true;
+        if (actors.contains(newActor)) {
+            System.out.println("Актёр " + newActor + " уже участвует в спектакле!");
+            return false;
         }
 
         actors.add(newActor);
-        System.out.println("Актёр " + newActor.getName() + " " +
-                newActor.getSurname() + " успешно добавлен!");
+        System.out.println("Актёр " + newActor + " успешно добавлен в спектакль '" + title + "'");
         return true;
     }
 
     public boolean replaceActor(String oldActorSurname, Actor newActor) {
-        if (oldActorSurname == null || oldActorSurname.isEmpty() || newActor == null) {
+        if (oldActorSurname == null && oldActorSurname.isEmpty() && newActor == null) {
             System.out.println("Ошибка: некорректные входные данные!");
             return false;
         }
@@ -57,25 +55,45 @@ public class Show {
             if (actor.getSurname().equalsIgnoreCase(oldActorSurname)) {
                 Actor oldActor = actors.get(i);
                 actors.set(i, newActor);
-                System.out.println("Актёр " + oldActor.getName() + " " + oldActorSurname +
-                        " заменён на " + newActor.getName() + " " + newActor.getSurname());
+                System.out.println("Актёр " + oldActor + " заменён на " + newActor);
                 return true;
             }
         }
-        System.out.println("Актёр с фамилией '" + oldActorSurname + "' не найден.");
+
+        System.out.println("Актёр с фамилией '" + oldActorSurname + "' не найден в спектакле.");
         return false;
     }
 
     public String getTitle() {
         return title;
     }
+
     public int getDuration() {
         return duration;
     }
-    public Director getDirector() {
+
+    public Person getDirector() {
         return director;
     }
+
     public ArrayList<Actor> getActors() {
         return actors;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public void setDirector(Person director) {
+        this.director = director;
+    }
+
+    public void setActors(ArrayList<Actor> actors) {
+        this.actors = actors;
+    }
+
 }

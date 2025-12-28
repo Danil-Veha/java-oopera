@@ -1,23 +1,43 @@
 public class MusicalSpectacle extends Show {
+    protected String musicAuthor;
     protected String librettoText;
-// Я бы добавил MusicAuthor сюда так как не каждый человек Композитор
-    public MusicalSpectacle(String title, int duration, Director director,
+
+    public MusicalSpectacle(String title, int duration, Person director,
                             String musicAuthor, String librettoText) {
         super(title, duration, director);
-        getDirector().setMusicAuthor(musicAuthor);
+
+        if (musicAuthor == null && director != null && director.getMusicAuthor() != null) {
+            this.musicAuthor = director.getMusicAuthor();
+        } else {
+            this.musicAuthor = musicAuthor;
+        }
+
         this.librettoText = librettoText;
     }
 
     public void printLibretto() {
-        System.out.println("Либретто спектакля '" + getTitle() + "':");
-        System.out.println(librettoText);
+        System.out.println("Либретто спектакля '" + title + "':");
+        if (librettoText != null && !librettoText.isEmpty()) {
+            System.out.println(librettoText);
+        } else {
+            System.out.println("(текст либретто отсутствует)");
+        }
     }
 
     public String getMusicAuthor() {
-        return getDirector().getMusicAuthor();
+        return musicAuthor;
     }
 
     public String getLibrettoText() {
         return librettoText;
     }
+
+    public void setMusicAuthor(String musicAuthor) {
+        this.musicAuthor = musicAuthor;
+    }
+
+    public void setLibrettoText(String librettoText) {
+        this.librettoText = librettoText;
+    }
+
 }

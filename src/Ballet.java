@@ -1,12 +1,23 @@
 public class Ballet extends MusicalSpectacle {
-// также бы написал бы в этом классе так как не каждый человк Танцор
-    public Ballet(String title, int duration, Director director,
+    protected String choreographer;
+
+    public Ballet(String title, int duration, Person director,
                   String musicAuthor, String librettoText, String choreographer) {
         super(title, duration, director, musicAuthor, librettoText);
-        getDirector().setChoreographer(choreographer);
+
+        if (choreographer == null && director != null && director.getChoreographer() != null) {
+            this.choreographer = director.getChoreographer();
+        } else {
+            this.choreographer = choreographer;
+        }
     }
 
     public String getChoreographer() {
-        return getDirector().getChoreographer();
+        return choreographer;
     }
+
+    public void setChoreographer(String choreographer) {
+        this.choreographer = choreographer;
+    }
+
 }
