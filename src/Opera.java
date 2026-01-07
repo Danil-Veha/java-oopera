@@ -1,9 +1,12 @@
-public class Opera extends MusicalSpectacle {
+import java.util.ArrayList;
+
+public class Opera extends MusicalShow {
     protected int choirSize;
 
-    public Opera(String title, int duration, Person director,
-                 String musicAuthor, String librettoText, int choirSize) {
-        super(title, duration, director, musicAuthor, librettoText);
+    public Opera(String title, int duration, Director director,
+                 ArrayList<Actor> actors, Person musicAuthor, String librettoText,
+                 int choirSize) {
+        super(title, duration, director, actors, musicAuthor, librettoText);
         this.choirSize = choirSize;
     }
 

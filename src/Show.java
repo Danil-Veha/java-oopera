@@ -1,16 +1,61 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class Show {
     protected String title;
     protected int duration;
-    protected Person director;
+    protected Director director;
     protected ArrayList<Actor> actors;
 
-    public Show(String title, int duration, Person director) {
+    public Show(String title, Director director, ArrayList<Actor> actors, int duration) {
         this.title = title;
+        this.director = director;
+        this.actors = actors;
         this.duration = duration;
+    }
+
+    public Show(String title, Director director, int duration) {
+        this.title = title;
         this.director = director;
         this.actors = new ArrayList<>();
+        this.duration = duration;
+    }
+
+    public boolean hasActorsWithSameSurname() {
+        if (actors == null || actors.size() < 2) {
+            return false;
+        }
+
+        Set<String> surnames = new HashSet<>();
+        for (Person actor : actors) {
+            if (actor != null && !surnames.add(actor.getSurname())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Map<String, List<Person>> getActorsWithSameSurname() {
+        Map<String, List<Person>> result = new HashMap<>();
+
+        if (actors == null || actors.size() < 2) {
+            return result;
+        }
+
+        Map<String, List<Person>> surnameMap = new HashMap<>();
+        for (Person actor : actors) {
+            if (actor != null) {
+                String surname = actor.getSurname();
+                surnameMap.computeIfAbsent(surname, k -> new ArrayList<>()).add(actor);
+            }
+        }
+
+        for (Map.Entry<String, List<Person>> entry : surnameMap.entrySet()) {
+            if (entry.getValue().size() > 1) {
+                result.put(entry.getKey(), entry.getValue());
+            }
+        }
+
+        return result;
     }
 
     public void printDirectorInfo() {
@@ -64,6 +109,8 @@ public class Show {
         return false;
     }
 
+
+
     public String getTitle() {
         return title;
     }
@@ -72,7 +119,7 @@ public class Show {
         return duration;
     }
 
-    public Person getDirector() {
+    public Director getDirector() {
         return director;
     }
 
@@ -88,7 +135,7 @@ public class Show {
         this.duration = duration;
     }
 
-    public void setDirector(Person director) {
+    public void setDirector(Director director) {
         this.director = director;
     }
 

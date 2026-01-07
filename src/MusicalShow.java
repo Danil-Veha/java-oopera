@@ -1,17 +1,13 @@
-public class MusicalSpectacle extends Show {
-    protected String musicAuthor;
+import java.util.ArrayList;
+
+public class MusicalShow extends Show {
+    protected Person musicAuthor;
     protected String librettoText;
 
-    public MusicalSpectacle(String title, int duration, Person director,
-                            String musicAuthor, String librettoText) {
-        super(title, duration, director);
-
-        if (musicAuthor == null && director != null && director.getMusicAuthor() != null) {
-            this.musicAuthor = director.getMusicAuthor();
-        } else {
-            this.musicAuthor = musicAuthor;
-        }
-
+    public MusicalShow(String title, int duration, Director director,
+                       ArrayList<Actor> actors, Person musicAuthor, String librettoText) {
+        super(title, director,actors, duration);
+        this.musicAuthor = musicAuthor;
         this.librettoText = librettoText;
     }
 
@@ -24,7 +20,7 @@ public class MusicalSpectacle extends Show {
         }
     }
 
-    public String getMusicAuthor() {
+    public Person getMusicAuthor() {
         return musicAuthor;
     }
 
@@ -32,7 +28,7 @@ public class MusicalSpectacle extends Show {
         return librettoText;
     }
 
-    public void setMusicAuthor(String musicAuthor) {
+    public void setMusicAuthor(Person musicAuthor) {
         this.musicAuthor = musicAuthor;
     }
 
